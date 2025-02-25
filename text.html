@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Tanisha ❤️ | Special Proposal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --theme-1-primary: #6DC7D1;    /* Soft Teal */
+            --theme-1-secondary: #E2F3F4;  /* Pale Blue */
+            
+            --theme-2-primary: #F991CC;    /* Bright Pink */
+            --theme-2-secondary: #FFDAFC;  /* Light Pink */
+            
+            --theme-3-primary: #000000;    /* Black */
+            --theme-3-secondary: #FFFFFF;  /* White */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.4s ease;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        /* Theme Styles */
+        body.theme-1 {
+            --primary: var(--theme-1-primary);
+            --secondary: var(--theme-1-secondary);
+        }
+
+        body.theme-2 {
+            --primary: var(--theme-2-primary);
+            --secondary: var(--theme-2-secondary);
+        }
+
+        body.theme-3 {
+            --primary: var(--theme-3-primary);
+            --secondary: var(--theme-3-secondary);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+            background: var(--secondary);
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .container {
+            text-align: center;
+            padding: 4rem 2rem;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .heart-container {
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .heart {
+            font-size: 5rem;
+            color: var(--primary);
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .message-box {
+            background: rgba(0,0,0,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            border: 2px solid var(--primary);
+        }
+
+        .proposal-button {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 1rem 2.5rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .proposal-button:hover {
+            transform: scale(1.05);
+        }
+
+        .hidden-message {
+            display: none;
+            margin-top: 2rem;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Floating Elements */
+        .floating-elements span {
+            position: fixed;
+            font-size: 1.5rem;
+            animation: float 6s linear infinite;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="theme-1">
+    <button class="theme-toggle" onclick="changeTheme()">Change Theme 🌈</button>
+
+    <div class="container">
+        <h1>My Dearest Tanisha</h1>
+        
+        <div class="heart-container">
+            <div class="heart">❤️</div>
+        </div>
+
+        <div class="message-box">
+            <p>Every day with you feels like a beautiful dream,<br>
+            Your smile is my favorite sunrise,<br>
+            Your laughter is my favorite melody...</p>
+        </div>
+
+        <button class="proposal-button" onclick="revealProposal()">Click to See My Heart</button>
+        
+        <div id="proposalMessage" class="hidden-message">
+            <p>Tanisha, will you make my life complete<br>by being mine forever? 💖</p>
+            <div class="heart" style="font-size: 2.5rem; margin-top: 1.5rem;">❤️</div>
+        </div>
+    </div>
+
+    <script>
+        let currentTheme = 1;
+        const totalThemes = 3;
+
+        function changeTheme() {
+            currentTheme = currentTheme % totalThemes + 1;
+            document.body.className = `theme-${currentTheme}`;
+            localStorage.setItem('selectedTheme', currentTheme);
+        }
+
+        function revealProposal() {
+            const proposal = document.getElementById('proposalMessage');
+            proposal.style.display = 'block';
+            document.querySelector('.proposal-button').style.display = 'none';
+            createFloatingElements();
+        }
+
+        function createFloatingElements() {
+            const container = document.createElement('div');
+            container.className = 'floating-elements';
+            
+            for(let i = 0; i < 20; i++) {
+                const element = document.createElement('span');
+                element.innerHTML = ['❤️', '🌸', '✨'][Math.floor(Math.random() * 3)];
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(element);
+            }
+            
+            document.body.appendChild(container);
+        }
+
+        // Load saved theme
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('selectedTheme');
+            if(savedTheme) {
+                currentTheme = parseInt(savedTheme);
+                document.body.className = `theme-${currentTheme}`;
+            }
+        }
+    </script>
+</body>
+</html>
